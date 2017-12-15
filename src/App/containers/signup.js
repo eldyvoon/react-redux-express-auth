@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Segment } from 'semantic-ui-react'
 
-import './login.css'
+import './login.less'
 
 const SignupForm = () => (
   <div className='signup-login-form'>
@@ -12,7 +12,7 @@ const SignupForm = () => (
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
-          Member Sign Up
+          Sign Up
         </Header>
         <Form size='large'>
           <Segment stacked>

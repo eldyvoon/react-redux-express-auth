@@ -13,13 +13,12 @@ require('dotenv').config();
 mongoose.Promise = global.Promise
 mongoose.connect(`mongodb://${process.env.DB_HOST}`)
 
-
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.use(function(req, res, next) {
   if (req.headers && req.headers.authorization && req.headers.authorization.split(' ')[0] === 'JWT') {
-    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'RESTFULAPIs', function(err, decode) {
+    jsonwebtoken.verify(req.headers.authorization.split(' ')[1], 'xx__secret__xx', function(err, decode) {
       if (err) req.user = false
       req.user = decode
       next()

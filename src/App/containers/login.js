@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
 
-import './login.css'
+import './login.less'
 
 const LoginForm = props => (
   <div className='signup-login-form'>
@@ -12,7 +12,7 @@ const LoginForm = props => (
     >
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as='h2' color='teal' textAlign='center'>
-          Member Login
+          Login
         </Header>
         <Form size='large'>
           <Segment stacked>
@@ -29,7 +29,6 @@ const LoginForm = props => (
               placeholder='Password'
               type='password'
             />
-
             <Button color='teal' fluid size='large'>Login</Button>
           </Segment>
         </Form>
