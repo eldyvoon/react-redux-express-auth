@@ -11,29 +11,41 @@ const bcrypt = require('bcrypt')
 const User = mongoose.model('User')
 
 exports.getUser = function(req, res) {
-  User.find({}, function(err, user) {
-    if (err) {
-      return res.status(400).send({
-        msg: err
-      })
-    } else {
-      return res.json({status:1, data: user})
-    }
-  })
-}
-
-exports.signup = function(req, res) {
-  const newUser = new User(req.body)
-  newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
-  newUser.save(function(err, user) {
+  console.log('iddddddd', req.query.id)
+  User.findOne({_id: req.query.id}, function(err, user) {
     if (err) {
       return res.status(400).send({
         msg: err
       })
     } else {
       user.hash_password = false
-      return res.json({status: 1, data:user})
+      return res.json({status: 1, data: jwt.sign({ email: user.email, fullName: user.fullName, role: user.role, _id: user._id }, 'xx__secret__xx')})
     }
+  })
+}
+
+exports.signup = function(req, res) {
+  User.findOne({
+    email: req.body.email
+  }, function(err, user) {
+    if(user){
+      return res.status(400).send({
+        msg: 'Email address is already taken!'
+      })
+    }
+
+    const newUser = new User(req.body)
+    newUser.hash_password = bcrypt.hashSync(req.body.password, 10)
+    newUser.save(function(err, user) {
+      if (err) {
+        return res.status(400).send({
+          msg: err
+        })
+      } else {
+        user.hash_password = false
+        return res.json({status: 1, data: jwt.sign({ email: user.email, fullName: user.fullName, role: user.role, _id: user._id }, 'xx__secret__xx')})
+      }
+    })
   })
 }
 
@@ -43,9 +55,9 @@ exports.login = function(req, res) {
   }, function(err, user) {
     if (err) throw err
     if (!user || !user.comparePassword(req.body.password)) {
-      return res.status(401).json({ msg: 'Authentication failed. Invalid user or password.' })
+      return res.status(400).json({ msg: 'Invalid email or password!' })
     }
-    return res.json({status: 1, data: jwt.sign({ email: user.email, fullName: user.fullName, _id: user._id }, 'xx__secret__xx') })
+    return res.json({status: 1, data: jwt.sign({ email: user.email, fullName: user.fullName, role: user.role, _id: user._id }, 'xx__secret__xx') })
   })
 }
 
