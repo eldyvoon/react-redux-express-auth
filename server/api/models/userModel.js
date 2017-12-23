@@ -1,12 +1,7 @@
-'use strict';
-
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const Schema = mongoose.Schema
 
-/**
- * User Schema
- */
 const UserSchema = new Schema({
   fullName: {
     type: String,
@@ -35,10 +30,6 @@ const UserSchema = new Schema({
     type: String,
     default: 'member'
   }
-});
-
-UserSchema.methods.comparePassword = function(password) {
-  return bcrypt.compareSync(password, this.hash_password)
-};
+})
 
 mongoose.model('User', UserSchema)

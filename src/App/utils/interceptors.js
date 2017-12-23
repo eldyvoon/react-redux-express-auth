@@ -4,6 +4,9 @@ import { REQUEST_START, REQUEST_STOP } from '../constants'
 
 axios.interceptors.request.use(config => {
 	store.dispatch({type: REQUEST_START})
+
+	config.headers.authorization = localStorage.getItem('token')
+
 	return config
 }, err => {
 	store.dispatch({type: REQUEST_STOP})

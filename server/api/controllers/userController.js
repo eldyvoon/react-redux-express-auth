@@ -11,7 +11,6 @@ const bcrypt = require('bcrypt')
 const User = mongoose.model('User')
 
 exports.getUser = function(req, res) {
-  console.log('iddddddd', req.query.id)
   User.findOne({_id: req.query.id}, function(err, user) {
     if (err) {
       return res.status(400).send({

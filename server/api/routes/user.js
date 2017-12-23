@@ -13,5 +13,5 @@ module.exports = function(app) {
 		.post(userController.forgotPassword)
 
 	app.route('/auth/user')
-		.get(userController.getUser)
+		.get(userController.loginRequired, userController.getUser)
 }
