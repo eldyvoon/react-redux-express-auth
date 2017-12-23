@@ -28,6 +28,7 @@ export function user(state=initState, action) {
 				redirectTo: '/login'
 			}
 		case GET_USER: {
+			console.log(action.payload)
 			console.log(jwtDecode(action.payload).fullName)
 			return {
 				...state,
