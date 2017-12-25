@@ -5,3 +5,6 @@ export const ERROR_MSG = 'ERROR_MSG'
 export const GET_USER = 'GET_USER'
 export const REQUEST_START = 'REQUEST_START'
 export const REQUEST_STOP = 'REQUEST_STOP'
+
+export const FETCH_ADS = 'FETCH_ADS'
+export const FETCH_AD = 'FETCH_AD'

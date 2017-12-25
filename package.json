@@ -39,6 +39,7 @@
     "jest": "20.0.4",
     "jsonwebtoken": "^8.1.0",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.20.1",
     "mongoose": "^4.13.6",
     "nodemailer": "^4.4.1",
     "nodemailer-sendgrid-transport": "^0.2.0",

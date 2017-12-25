@@ -4,7 +4,11 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 3001
 const mongoose = require('mongoose')
-const User = require('./api/models/userModel')
+
+//mongoose model
+require('./api/models/userModel')
+require('./api/models/adModel')
+
 const bodyParser = require('body-parser')
 const jsonwebtoken = require("jsonwebtoken")
 
@@ -30,8 +34,8 @@ app.use(function(req, res, next) {
   }
 })
 
-const routes = require('./api/routes/user')
-routes(app)
+require('./api/routes/user')(app)
+require('./api/routes/ad')(app)
 
 app.use(function(req, res) {
   res.status(404).send({ url: req.originalUrl + ' not found' })

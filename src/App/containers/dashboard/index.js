@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Container } from 'semantic-ui-react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
-import UserArea from './user'
 import AdminArea from './admin'
 import Navbar from './navbar'
-import { Container } from 'semantic-ui-react'
+import UserArea from './user'
+import AdDetail from './user/adDetail'
 
 @connect(state=>state.user)
 export default class Dashboard extends Component {
@@ -18,7 +20,14 @@ export default class Dashboard extends Component {
 				<Navbar />
 				<Container>
 					{isAdmin && <AdminArea />}
-					{!isAdmin && <UserArea />}
+					{!isAdmin && 
+            <BrowserRouter>
+              <Switch>
+                <Route exact path='/dashboard' component={UserArea} />
+                <Route exact path='/dashboard/ad/:id' component={AdDetail} />
+              </Switch>
+            </BrowserRouter>
+					}
 				</Container>
 			</div>
 		)

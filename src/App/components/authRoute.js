@@ -23,14 +23,16 @@ class AuthRoute extends Component {
 		const user = window.localStorage.getItem('token')
 		const userId = user && jwtDecode(user)._id
 
-		if(user){
+		if(!user) this.props.history.replace('/login')
+
+		/*if(user){
 			this.props.getUser(userId)
 				.then(res=> {
 					this.props.history.push('/dashboard')
 				})
 		}else{
 			this.props.history.replace('/login')
-		}
+		}*/
 	}
 
 	render(){
