@@ -8,3 +8,6 @@ export const REQUEST_STOP = 'REQUEST_STOP'
 
 export const FETCH_ADS = 'FETCH_ADS'
 export const FETCH_AD = 'FETCH_AD'
+
+export const APPLY_AD = 'APPLY_AD'
+export const SUBMIT_AD = 'SUBMIT_AD'

@@ -35,3 +35,36 @@ exports.createAd = function(req, res) {
     return res.json({status: 1, data: result})
   })
 }
+
+exports.applyAd = function(req, res) {
+    const { id, userId } = req.body
+
+    Ad.findOneAndUpdate({_id: id, }, {$set: {'applicant._id': userId, 'status':'applied'}}, {upsert: true, 'new': true}, function(err, result) {
+    if (err) {
+      return res.status(400).send({
+        msg: err
+      })
+    }
+    return res.json({status: 1, data: result})
+  })
+}
+
+exports.submitAd = function(req, res) {
+    const { id, userId, content } = req.body
+
+    Ad.findOneAndUpdate({_id: id, }, 
+      {$set: 
+        {'submission.date': Date.now(), 
+         'submission.content': content,
+         'status': 'submitted'
+        }
+      }, 
+      {upsert: true, 'new': true}, function(err, result) {
+    if (err) {
+      return res.status(400).send({
+        msg: err
+      })
+    }
+    return res.json({status: 1, data: result})
+  })
+}

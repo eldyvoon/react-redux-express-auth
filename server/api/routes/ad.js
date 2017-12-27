@@ -10,8 +10,11 @@ module.exports = function(app) {
 	app.route('/ad/:id')
 		.get(adController.getAd)
 
-/*	app.route('/ad/apply')
-		.post(adController.applyAd)*/
+	app.route('/ad/apply')
+		.put(adController.applyAd)
+
+	app.route('/ad/submit')
+		.put(adController.submitAd)
 
 	//business
 	app.route('/ad/create')

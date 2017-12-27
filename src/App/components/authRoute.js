@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom'
 import { getUser } from '../actions/userAction'
 import { connect } from 'react-redux'
 
-import jwtDecode from 'jwt-decode'
+//import jwtDecode from 'jwt-decode'
 
 @withRouter
 @connect(state=>state.user,
@@ -21,7 +21,7 @@ class AuthRoute extends Component {
 		}
 
 		const user = window.localStorage.getItem('token')
-		const userId = user && jwtDecode(user)._id
+		//const userId = user && jwtDecode(user)._id
 
 		if(!user) this.props.history.replace('/login')
 

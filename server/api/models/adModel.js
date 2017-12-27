@@ -31,14 +31,19 @@ const AdSchema = new Schema({
     _id: {
       type: Schema.Types.ObjectId,
       default: null
+    }
+  },
+  submission: {
+    date: {
+      type: Date
     },
-    name: {
+    content: {
       type: String
     }
   },
   status: {
     type: String,
-    default: 'active' //active, applied, completed, expired
+    default: 'active' //active, applied, submitted, completed, expired
   }
 })
 

@@ -3,31 +3,43 @@ import { Container } from 'semantic-ui-react'
 import AdDetail from '../../../components/adDetail'
 
 import { connect } from 'react-redux'
-import { fetchAd } from '../../../actions/adAction'
+import { fetchAd, applyAd } from '../../../actions/adAction'
 
-import { Card } from 'semantic-ui-react'
+import { Redirect } from 'react-router-dom'
 
-@connect(state=>state.ads,{fetchAd})
+@connect(state=>state.ads,{fetchAd, applyAd})
 class adDetail extends Component {
 
-	componentDidMount() {
-		const adId = this.props.match.params.id
-		this.props.fetchAd(adId)
+	constructor(props) {
+		super(props);
+		this.state = {
+			isOpen: false
+		}
 	}
+
+	componentDidMount() {
+		this.adId = this.props.match.params.id
+		this.props.fetchAd(this.adId)
+	}
+
+	applyAd() {
+		const userId = window.localStorage.getItem('userId')
+		this.props.applyAd(this.adId, userId)
+	}
+
 	render() {
 
-		const { ad } = this.props
-		console.log(ad)
+		const { ad, redirectTo } = this.props
 
 		return(
 			<Container>
-				<Card fluid>
-		      <Card.Content>
-		        <Card.Header content='Jake Smith' />
-		        <Card.Meta content='Musicians' />
-		        <Card.Description content='Jake is a drummer living in New York.' />
-		      </Card.Content>
-		    </Card>
+			  {redirectTo && <Redirect to={redirectTo} />}
+				{ad && <AdDetail 
+					data={ad}
+					applyAd={()=>this.applyAd()}
+					openModal={()=>this.setState({isOpen: true})}
+					closeModal={()=>this.setState({isOpen: false})}
+					isOpen={this.state.isOpen} />}
 			</Container>
 		)
 	}

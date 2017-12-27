@@ -1,12 +1,17 @@
 import React from 'react'
-import { Card, Button } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
+import { Card, Label } from 'semantic-ui-react'
 import './ad.less'
 
 const Ad = ({data}) => (
-    <Card className='ad'
-      href={`ad/${data._id}`}
+    <Card as={Link} to={`/dashboard/ad/${data._id}`} className='ad'
       header={data.title}
-      meta={data.category}
+      meta={
+        <div className='meta'>
+          <Label>{data.category}</Label>
+          <Label>{data.language}</Label>
+        </div>
+      }
       extra={
         <div className='extra'>
           <p className='left'>{`RM ${data.reward}`}</p>

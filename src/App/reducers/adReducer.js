@@ -1,9 +1,10 @@
-import { FETCH_ADS, FETCH_AD } from '../constants'
+import { FETCH_ADS, FETCH_AD, APPLY_AD, SUBMIT_AD } from '../constants'
 import moment from 'moment'
 
 const initState = {
 	ads: [],
-	ad: {}
+	ad: {},
+	redirectTo: ''
 }
 
 export function ads(state=initState, action) {
@@ -16,12 +17,24 @@ export function ads(state=initState, action) {
 						...o,
 						expiry_date: o.expiry_date && moment(o.expiry_date).format('DD-MM-YYYY')
 					}
-				})
+				}),
+				redirectTo: ''
 			}
 		case FETCH_AD:
 			return { 
 				...state,
-				ad: action.payload
+				ad: action.payload,
+				redirectTo: ''
+			}
+		case APPLY_AD:
+			return {
+				...state,
+				redirectTo: action.payload.status === 'applied' && `/dashboard/ad/${action.payload._id}/applied`
+			}
+		case SUBMIT_AD:
+			return {
+				...state,
+				redirectTo: action.payload.status === 'submitted' && `/dashboard`
 			}
 		default:
 			return state

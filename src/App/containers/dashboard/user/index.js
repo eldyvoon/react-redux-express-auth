@@ -16,7 +16,7 @@ class User extends Component {
 	render() {
 
 		const { ads } = this.props
-		console.log(ads)
+
 		return(
 			<Container>
 				{ads.length > 1 && <Card.Group>
