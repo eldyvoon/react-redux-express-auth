@@ -34,12 +34,12 @@ class adDetail extends Component {
 		return(
 			<Container>
 			  {redirectTo && <Redirect to={redirectTo} />}
-				{ad && <AdDetail 
+				<AdDetail 
 					data={ad}
 					applyAd={()=>this.applyAd()}
 					openModal={()=>this.setState({isOpen: true})}
 					closeModal={()=>this.setState({isOpen: false})}
-					isOpen={this.state.isOpen} />}
+					isOpen={this.state.isOpen} />
 			</Container>
 		)
 	}

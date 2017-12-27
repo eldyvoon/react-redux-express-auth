@@ -19,7 +19,7 @@ class User extends Component {
 
 		return(
 			<Container>
-				{ads.length > 1 && <Card.Group>
+				{ads.length > 0 && <Card.Group>
 					{ads.map(data => <Ad key={data._id} data={data} />)}
 					</Card.Group>
 				}
